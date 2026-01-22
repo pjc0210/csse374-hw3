@@ -8,7 +8,7 @@ import java.io.IOException;
  * This is the text file Saver, used by InventorySaver, which is supposed 
  * to be the same for this or any other Savers used.
  */
-public class Saver {
+public class Saver implements SaverInterface {
 
 	BufferedWriter writer;
 	

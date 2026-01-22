@@ -103,11 +103,19 @@ public class GuitarInventoryTester {
 		inventory.addGuitar("12345", 1699.95, whatErinLikes); // guitar spec saved from test search
 		System.out.println("After removing 77023 and adding 12345, all guitars in inventory are:"); // Show what we read in:
 		System.out.println(inventory);
+
+
+
 		// And try writing it out to a different file, for comparison:
-		String outputFileName = "guitar_inventory_output.txt";
-		Saver saver = new Saver(outputFileName, directoryName); // The text file saver
-		InventorySaver.saveInventory(inventory, saver); // Used here by the standard inventory saver
+		//outputting to Json here
+		String outputFileName = "guitar_inventory_output.json";
+		JsonSaverAdapter saver = new JsonSaverAdapter(outputFileName, directoryName);
+		InventorySaver.saveInventory(inventory, saver);
 		System.out.println("Revised inventory written to "+outputFileName);
+
+
+
+
 	}
 	
 	public static void main(String[] args) {
