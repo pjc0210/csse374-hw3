@@ -1,6 +1,6 @@
 @startuml
 interface LoaderInterface {
-    + asNext(): boolean
+    + hasNext(): boolean
     + next(): String
 }
 
@@ -13,6 +13,7 @@ class Loader {
     - hasNextLine: boolean
     - reader: BufferedReader
     ~ nextLine: String
+
     + Loader(dataFileName: String, directoryName: String) throws IOException
     + hasNext(): boolean
     + next(): String
@@ -21,6 +22,7 @@ class Loader {
 
 class Saver {
     ~ writer: BufferedWriter
+
     + Saver(dataFileName: String, directoryName: String)
     + writeNext(data: String): boolean
     + closeSaver(): boolean
@@ -28,13 +30,18 @@ class Saver {
 
 class JsonLoader {
     - guitarDataList: ArrayList<String>
-    - loadJsonData(filename: String, directoryName: Stirng): void
+    - loadJsonData(filename: String, directoryName: String): void
+
     + JsonLoader(filename: String, directoryName: String)
     + getGuitarDataList(): ArrayList<String>
 }
 
 class JsonSaver {
-    + addGuitar(guitarData: JsonGuitarData): void
+    - filePath: String
+    - inventoryArrayBuilder: JsonArrayBuilder
+
+    + JsonSaver(dataFileName: String, directoryName: String)
+    + addGuitar(serialNumber: String, price: String, builder: String, model: String,\nguitarType: String, numStrings: String, backWood: String, topWood: String): void
     + writeToFile(): boolean
 }
 
@@ -42,6 +49,7 @@ class JsonLoaderAdapter {
     - jsonLoader: JsonLoader
     - currIndex: int
     - guitarDataList: ArrayList<String>
+
     + JsonLoaderAdapter(filename: String, directoryName: String)
     + hasNext(): boolean
     + next(): String
@@ -49,6 +57,11 @@ class JsonLoaderAdapter {
 
 class JsonSaverAdapter {
     - jsonSaver: JsonSaver
+    - currentGuitarFields: String[]
+    - currentFieldIndex: int
+    {static} + FIELDS_PER_GUITAR: int
+
+    + JsonSaverAdapter(dataFileName: String, directoryName: String)
     + writeNext(data: String): boolean
     + closeSaver(): boolean
 }
