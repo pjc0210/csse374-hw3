@@ -1,0 +1,70 @@
+@startuml
+interface LoaderInterface {
++ asNext(): boolean
++next(): String
+}
+
+interface SaverInterface {
++writeNext(data: String): boolean
++closeSaver(): boolean
+}
+
+ class Loader {
+    - hasNextLine: boolean
+    - reader: BufferedReader
+    ~ nextLine: String
+    + Loader(dataFileName: String, directoryName: String) throws IOException
+    + hasNext(): boolean
+    + next(): String
+    + getNextLine(): boolean
+  }
+
+  class Saver {
+    ~ writer: BufferedWriter
+    + Saver(dataFileName: String, directoryName: String)
+    + writeNext(data: String): boolean
+    + closeSaver(): boolean
+  }
+
+class JsonLoader {
++getGuitars(): List<JsonGuitarData>
+}
+
+class JsonSaver {
++addGuitar(guitarData: JsonGuitarData): void
++writeToFile(): boolean
+}
+
+
+class JsonLoaderAdapter {
+-jsonLoader: JsonLoader
++hasNext(): boolean
++next(): String
+}
+
+class JsonSaverAdapter {
+-jsonSaver: JsonSaver
++writeNext(data: String): boolean
++closeSaver(): boolean
+}
+
+  class InventoryLoader {
+    {static} + loadInventory(inventory: Inventory, loader: Loader): void
+  }
+
+  class InventorySaver {
+    {static} + saveInventory(inventory: Inventory, saver: Saver): void
+  }
+
+Loader .up.|> LoaderInterface
+Saver .up.|> SaverInterface
+JsonLoaderAdapter .up.|> LoaderInterface
+JsonSaverAdapter .up.|> SaverInterface
+
+JsonLoaderAdapter -down-> JsonLoader
+JsonSaverAdapter -down-> JsonSaver
+
+InventoryLoader .down.> LoaderInterface
+InventorySaver .down.> SaverInterface
+
+@enduml
