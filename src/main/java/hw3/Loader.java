@@ -16,7 +16,7 @@ import java.util.stream.Stream;
  * This is the text file Loader, used by InventoryLoader, which is supposed 
  * to be the same for this or any other Loaders used.
  */
-public class Loader {
+public class Loader implements LoaderInterface{
     private boolean hasNextLine = false;
     private BufferedReader reader = null;
     String nextLine;
@@ -27,10 +27,12 @@ public class Loader {
     	getNextLine();
     }
 
+    @Override
     public boolean hasNext() {
         return this.hasNextLine;
     }
 
+    @Override
     public String next() {
   		String lineToReturn = nextLine; // Read one-ahead to preset "hasNextLine" value.
   		//System.out.println("Delivering next line to Inventory Loader = "+lineToReturn);
@@ -40,7 +42,7 @@ public class Loader {
 
     // Common read-next-line routine - detects end of file,
     // skips blank lines, returns true for non-file-errors
-    public boolean getNextLine() {
+    private boolean getNextLine() {
     	boolean notGot = true;
     	while (notGot) {
 	    	try { 

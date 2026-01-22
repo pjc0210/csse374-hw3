@@ -1,15 +1,15 @@
 @startuml
 interface LoaderInterface {
-+ asNext(): boolean
-+next(): String
+    + asNext(): boolean
+    + next(): String
 }
 
 interface SaverInterface {
-+writeNext(data: String): boolean
-+closeSaver(): boolean
+    + writeNext(data: String): boolean
+    + closeSaver(): boolean
 }
 
- class Loader {
+class Loader {
     - hasNextLine: boolean
     - reader: BufferedReader
     ~ nextLine: String
@@ -17,44 +17,49 @@ interface SaverInterface {
     + hasNext(): boolean
     + next(): String
     + getNextLine(): boolean
-  }
+}
 
-  class Saver {
+class Saver {
     ~ writer: BufferedWriter
     + Saver(dataFileName: String, directoryName: String)
     + writeNext(data: String): boolean
     + closeSaver(): boolean
-  }
+}
 
 class JsonLoader {
-+getGuitars(): List<JsonGuitarData>
+    - guitarDataList: ArrayList<String>
+    - loadJsonData(filename: String, directoryName: Stirng): void
+    + JsonLoader(filename: String, directoryName: String)
+    + getGuitarDataList(): ArrayList<String>
 }
 
 class JsonSaver {
-+addGuitar(guitarData: JsonGuitarData): void
-+writeToFile(): boolean
+    + addGuitar(guitarData: JsonGuitarData): void
+    + writeToFile(): boolean
 }
 
-
 class JsonLoaderAdapter {
--jsonLoader: JsonLoader
-+hasNext(): boolean
-+next(): String
+    - jsonLoader: JsonLoader
+    - currIndex: int
+    - guitarDataList: ArrayList<String>
+    + JsonLoaderAdapter(filename: String, directoryName: String)
+    + hasNext(): boolean
+    + next(): String
 }
 
 class JsonSaverAdapter {
--jsonSaver: JsonSaver
-+writeNext(data: String): boolean
-+closeSaver(): boolean
+    - jsonSaver: JsonSaver
+    + writeNext(data: String): boolean
+    + closeSaver(): boolean
 }
 
-  class InventoryLoader {
-    {static} + loadInventory(inventory: Inventory, loader: Loader): void
-  }
+class InventoryLoader {
+    {static} + loadInventory(inventory: Inventory, loader: LoaderInterface): void
+}
 
-  class InventorySaver {
-    {static} + saveInventory(inventory: Inventory, saver: Saver): void
-  }
+class InventorySaver {
+    {static} + saveInventory(inventory: Inventory, saver: SaverInterface): void
+}
 
 Loader .up.|> LoaderInterface
 Saver .up.|> SaverInterface
