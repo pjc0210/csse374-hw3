@@ -12,6 +12,11 @@ import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Adapter class that adapts JsonSaver to the SaverInterface.
+ * @author Jack Frampton
+ */
+
 public class JsonSaver {
     private String filePath;
     private JsonArrayBuilder inventoryArrayBuilder;

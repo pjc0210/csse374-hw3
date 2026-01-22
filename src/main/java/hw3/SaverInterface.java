@@ -2,6 +2,7 @@ package main.java.hw3;
 
 /**
  * Interface for saving guitar inventory data.
+ * @author Jack Frampton
  */
 public interface SaverInterface {
     /**

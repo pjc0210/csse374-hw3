@@ -2,6 +2,7 @@ package main.java.hw3;
 
 /**
  * Adapter class that adapts JsonSaver to the SaverInterface.
+ * @author Jack Frampton
  */
 public class JsonSaverAdapter implements SaverInterface {
 

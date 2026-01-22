@@ -7,6 +7,8 @@ import java.io.IOException;
 /*
  * This is the text file Saver, used by InventorySaver, which is supposed 
  * to be the same for this or any other Savers used.
+ *
+ * Changes to this file made by Jack Frampton
  */
 public class Saver implements SaverInterface {
 
