@@ -93,7 +93,7 @@ public class GuitarInventoryTester {
 		Inventory inventory = new Inventory();
 
 		// This call uses the loader to initialize the inventory
-        this.initializeInventory(inventory, dataFileName, directoryName);
+        this.initializeInventory(inventory, (LOAD_OPTION.equals("json") ? jsonDataFileName : dataFileName), directoryName);
 
 		System.out.println("All guitars in inventory are:"); // Show what we read in:
 		System.out.println(inventory);
@@ -112,10 +112,6 @@ public class GuitarInventoryTester {
 		JsonSaverAdapter saver = new JsonSaverAdapter(outputFileName, directoryName);
 		InventorySaver.saveInventory(inventory, saver);
 		System.out.println("Revised inventory written to "+outputFileName);
-
-
-
-
 	}
 	
 	public static void main(String[] args) {
