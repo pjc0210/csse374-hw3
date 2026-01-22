@@ -7,6 +7,8 @@ import java.util.Set;
 
 public class GuitarInventoryTester {
 
+    public static final String LOAD_OPTION = "json"; // change to "text" to use text loader/saver
+
 	// Here we pretend a user named Erin is inputting what she wants in a guitar.
 	// We search for it and show her the results in the console.  And then let her 
 	// select just some of the search criteria for a wider search, if desired.
@@ -62,33 +64,23 @@ public class GuitarInventoryTester {
 	}
 
 
-	// This method reads the text-based guitar inventory file:
+	// This method reads the guitar inventory file:
 	private void initializeInventory(Inventory inventory, String dataFileName, String directoryName) {
-		Loader textBasedLoader = null;
+		LoaderInterface loader = null;
 		try {
-			textBasedLoader = new Loader(dataFileName, directoryName);
+            if (LOAD_OPTION.equals("text")) {
+                loader = new Loader(dataFileName, directoryName);
+            } else {
+                loader = new JsonLoaderAdapter(dataFileName, directoryName);
+            }
 		} catch (IOException e) {
 			System.out.println(">>Error opening guitar inventory file.");
 			e.printStackTrace();
 		}
 		//System.out.println("Loading data from file "+dataFileName+" in directory "+directoryName);
-		InventoryLoader.loadInventory(inventory, textBasedLoader); 
+		InventoryLoader.loadInventory(inventory, loader);
 		System.out.println("Loaded guitar inventory, size = "+inventory.getSize());
 	}
-
-    // This method reads the json-based guitar inventory file:
-    private void initializeInventoryJson(Inventory inventory, String dataFileName, String directoryName) {
-        LoaderInterface jsonLoaderAdapter = null;
-        try {
-            jsonLoaderAdapter = new JsonLoaderAdapter(dataFileName, directoryName);
-        } catch (Exception e) {
-            System.out.println(">>Error opening guitar inventory JSON file.");
-            e.printStackTrace();
-        }
-        //System.out.println("Loading data from file "+dataFileName+" in directory "+directoryName);
-        InventoryLoader.loadInventory(inventory, jsonLoaderAdapter);
-        System.out.println("Loaded guitar inventory, size = "+inventory.getSize());
-    }
 
 	// This test app reads-in the guitar inventory file, displays the results and then 
 	// runs the test for a single user, above.  It then deletes one guitar, from inventory,
@@ -99,9 +91,10 @@ public class GuitarInventoryTester {
         String jsonDataFileName = "guitar_inventory.json";
 		String directoryName = "resources/";
 		Inventory inventory = new Inventory();
-		// This call uses the text-based loader to initialize the inventory
-//		this.initializeInventory(inventory, dataFileName, directoryName);
-        this.initializeInventoryJson(inventory, jsonDataFileName, directoryName);
+
+		// This call uses the loader to initialize the inventory
+        this.initializeInventory(inventory, dataFileName, directoryName);
+
 		System.out.println("All guitars in inventory are:"); // Show what we read in:
 		System.out.println(inventory);
 		this.runTest(inventory); // Then run our one user test search, above.
