@@ -8,6 +8,7 @@ import java.util.Set;
 public class GuitarInventoryTester {
 
     public static final String LOAD_OPTION = "json"; // change to "text" to use text loader/saver
+	public static final String SAVE_OPTION = "text";
 
 	// Here we pretend a user named Erin is inputting what she wants in a guitar.
 	// We search for it and show her the results in the console.  And then let her 
@@ -104,14 +105,21 @@ public class GuitarInventoryTester {
 		System.out.println("After removing 77023 and adding 12345, all guitars in inventory are:"); // Show what we read in:
 		System.out.println(inventory);
 
+		if (SAVE_OPTION.equals("text")) {
+			// And try writing it out to a different file, for comparison:
+			String outputFileName = "guitar_inventory_output.txt";
+			Saver saver = new Saver(outputFileName, directoryName); // The text file saver
+			InventorySaver.saveInventory(inventory, saver); // Used here by the standard inventory saver
+			System.out.println("Revised inventory written to "+outputFileName);
+		} else {
+			//outputting to Json here
+			String outputFileName = "guitar_inventory_output.json";
+			JsonSaverAdapter saver = new JsonSaverAdapter(outputFileName, directoryName);
+			InventorySaver.saveInventory(inventory, saver);
+			System.out.println("Revised inventory written to "+outputFileName);
+		}
 
 
-		// And try writing it out to a different file, for comparison:
-		//outputting to Json here
-		String outputFileName = "guitar_inventory_output.json";
-		JsonSaverAdapter saver = new JsonSaverAdapter(outputFileName, directoryName);
-		InventorySaver.saveInventory(inventory, saver);
-		System.out.println("Revised inventory written to "+outputFileName);
 	}
 	
 	public static void main(String[] args) {

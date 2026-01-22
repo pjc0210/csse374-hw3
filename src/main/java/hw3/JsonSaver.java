@@ -12,11 +12,6 @@ import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Native JSON file writer for guitar inventory data.
- * This class writes guitar data to JSON files.
- * It is the "Adaptee" in the Adapter pattern for saving.
- */
 public class JsonSaver {
     private String filePath;
     private JsonArrayBuilder inventoryArrayBuilder;

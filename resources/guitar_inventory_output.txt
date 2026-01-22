@@ -30,6 +30,14 @@ electric
 6
 Mahogany
 Mahogany
+6 29584
+2100.95
+PRS
+Dave Navarro Signature
+electric
+6
+Mahogany
+Maple
 122784
 5495.95
 Martin
@@ -46,14 +54,6 @@ acoustic
 12
 Cocobolo
 Cedar
-"6 29584"
-2100.95
-PRS
-"Dave Navarro Signature"
-electric
-6
-Mahogany
-Maple
 12345
 1699.95
 Fender
@@ -73,7 +73,7 @@ Sitka
 82765501
 1890.95
 Gibson
-"SG '61 Reissue"
+SG '61 Reissue
 electric
 6
 Mahogany
