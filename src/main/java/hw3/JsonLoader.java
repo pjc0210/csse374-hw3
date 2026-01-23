@@ -5,6 +5,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * JsonLoader class to load guitar data from a JSON file.
+ * @author Pei-Jen Chen
+ */
 public class JsonLoader {
     private final ArrayList<String> guitarDataList;
 
@@ -13,6 +17,11 @@ public class JsonLoader {
         loadJsonData(filename, directoryName);
     }
 
+    /**
+     * Load guitar data from a JSON file.
+     * @param filename
+     * @param directoryName
+     */
     private void loadJsonData(String filename, String directoryName) {
         String filePath = directoryName + filename;
 
@@ -36,6 +45,10 @@ public class JsonLoader {
         }
     }
 
+    /**
+     * Get the list of guitar data.
+     * @return data list of guitars
+     */
     public ArrayList<String> getGuitarDataList() {
         return this.guitarDataList;
     }

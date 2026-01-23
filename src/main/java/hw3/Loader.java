@@ -15,6 +15,8 @@ import java.util.stream.Stream;
 /*
  * This is the text file Loader, used by InventoryLoader, which is supposed 
  * to be the same for this or any other Loaders used.
+ *
+ * changes to this file made by Pei-Jen Chen
  */
 public class Loader implements LoaderInterface{
     private boolean hasNextLine = false;

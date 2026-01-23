@@ -3,6 +3,7 @@ package main.java.hw3;
 import java.util.List;
 import java.util.ArrayList;
 
+// changes in this file made by Pei-Jen Chen
 public class InventoryLoader {
     public static void loadInventory(Inventory inventory, LoaderInterface loader) {
         // Notes: 
