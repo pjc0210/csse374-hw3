@@ -204,7 +204,7 @@ GuitarSpec --> Wood
 InventoryLoader ..> Inventory
 InventoryLoader ..> Loader
 InventoryLoader ..> GuitarSpec
-InventoryLoader ..> Builderm
+InventoryLoader ..> Builder
 InventoryLoader ..> Type
 InventoryLoader ..> Wood
 
